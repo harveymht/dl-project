@@ -29,7 +29,7 @@ I use CrossEntropyLoss as the loss function and use SGD with learning rate 0.01 
 
 **Results:**
 
-1) Rehearsal
+a) Rehearsal
 
 The rehearsal strengthens the connection for memories already learned. In rehearsal, data from previous tasks is periodically appended to the training data for a new task.
 
@@ -41,7 +41,7 @@ In this project there are 9 batches(tasks) in the training process. In each batc
 
 Using more old data will increase the accuracy, but it will lead to high memory use and slow runtimes. Conversely, reducing the proportion of old data in each round of training will increase speed and efficiency, but give lower performance. I need to find the sweet spot which allows efficient use of memory and processing time with relatively good performance. After fine-tuning, the optimal number of old data per batch retained to use for next round is about 12,000.
 
-1) Elastic Weight Consolidation
+b) Elastic Weight Consolidation
 
 EWC is a regularization strategy in which the loss function as defined by
 
@@ -59,7 +59,7 @@ It requires more memory and runtimes. Maybe I can use a single penalty, not the 
 
 Using a single dictionary of fisher matrix values can still limit catastrophic forgetting and give a faster and more efficient performance.
 
-1) Hybrid rehearsal with EWC
+c) Hybrid rehearsal with EWC
 
 Combine rehearsal strategy with EWC to see if we can get some improvement. Half of the previous tasks' data is appended to the training data, and then use the train-net-ewc function to train this training data. 
 
