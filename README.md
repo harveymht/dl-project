@@ -37,7 +37,7 @@ Use [cl_rehearsal.py](https://github.com/harveymht/dl-project/blob/master/cl_reh
 
 In this project there are 9 batches(tasks) in the training process. In each batch I combine half of data of previous batches and all data of this batch to train. Here is the test accuracy on batch 0 after training each batch in incremental order.
 
-![](pictures/Aspose.Words.a8e3071a-31fd-431b-97fa-fc4da8aeeca8.001.png)
+![](pictures/1.png)
 
 Using more old data will increase the accuracy, but it will lead to high memory use and slow runtimes. Conversely, reducing the proportion of old data in each round of training will increase speed and efficiency, but give lower performance. I need to find the sweet spot which allows efficient use of memory and processing time with relatively good performance. After fine-tuning, the optimal number of old data per batch retained to use for next round is about 12,000.
 
@@ -53,7 +53,7 @@ Use [cl_ewc.py](https://github.com/harveymht/dl-project/blob/master/cl_ewc.py) t
 
 In this project there are 9 batches(tasks) in the training process, and I set λ=4. In each batch I store the fisher matrix values and optimum weights for this task and accumulate all penalties of previous batches to the loss of this batch. Here is the test accuracy on batch 0 after training each batch in incremental order.
 
-![](pictures/Aspose.Words.a8e3071a-31fd-431b-97fa-fc4da8aeeca8.002.png)
+![](pictures/2.png)
 
 It requires more memory and runtimes. Maybe I can use a single penalty, not the accumulation of previous tasks, to reduce memory use and increase efficiency.
 
@@ -67,7 +67,7 @@ Use [cl_hybrid.py](https://github.com/harveymht/dl-project/blob/master/cl_hybrid
 
 Here is the test accuracy on batch 0 after training each batch in incremental order.
 
-![](pictures/Aspose.Words.a8e3071a-31fd-431b-97fa-fc4da8aeeca8.003.png)
+![](pictures/3.png)
 
 
 
@@ -76,11 +76,11 @@ Here is the test accuracy on batch 0 after training each batch in incremental or
 
 Because the goal of continuous learning is to remember tasks over time, I only focus on the accuracy on batch 0. Plot below shows the batch 0 accuracy of all methods. And it tells us that rehearsal is the best strategy to maintain test accuracy over different batches. The hybrid strategy and rehearsal had almost identical performance. The EWC in the hybrid strategy suffered dramatically, so the hybrid method performed well solely because of rehearsal.
 
-![](pictures/Aspose.Words.a8e3071a-31fd-431b-97fa-fc4da8aeeca8.004.png)
+![](pictures/4.png)
 
 On the other hand, the overall accuracy of the model is also very important. Plot below shows the average accuracy for all batches. It tells us that the accuracy for naive and EWC do not increase, but rehearsal and the hybrid method can increase average accuracy.
 
-![](pictures/Aspose.Words.a8e3071a-31fd-431b-97fa-fc4da8aeeca8.005.png)
+![](pictures/5.png)
 
 In this project, I compared the three strategies and saw how they perform. I got some results and found a good strategy rehearsal, but it took much time to run. Then I combined it with EWC and generated a hybrid strategy, which needs less time to run while retaining the good performance as rehearsal.
 
